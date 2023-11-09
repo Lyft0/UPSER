@@ -23,7 +23,7 @@
             <div class="req-detail">
                 <p class="mb-2" style="font-weight: bold;">Request Details</p>
                 <div class="req-detail">
-                    <label for="jumlah_peserta">Jumlah Peseerta</label><br><input type="number" name="jumlah_peserta" id="jumlah_peserta" min="1" value="1"><br>
+                    <label for="jumlah_peserta">Jumlah Peserta</label><br><input type="number" name="jumlah_peserta" id="jumlah_peserta" min="1" value="1"><br>
                     <label for="tgl_mulai">Tanggal Mulai</label><br><input type="date" name="tgl_mulai" id="tgl_mulai"><br>
                     <label for="tgl_selesai">Tanggal Selesai</label><br><input type="date" name="tgl_selesai" id="tgl_selesai"><br>
                     <label for="jam_mulai">Jam Mulai</label><br><input type="time" name="jam_mulai" id="jam_mulai"><br>
@@ -31,10 +31,10 @@
                 </div>
             </div>
             <div class="table-item">
-                <label style="margin-top: 33px;" for="nama_ruang">Nama Ruangan/Tempat</label><br>
-                <input type="text" name="nama_ruang" id="nama_ruang" style="width: 270px;"><br>
-                <label for="nama_item">Jenis Kegiatan</label><br>
-                <select name="nama_item" id="nama_item">
+                <label style="margin-top: 33px;" for="nama_tempat">Nama Ruangan/Tempat</label><br>
+                <input type="text" name="nama_tempat" id="nama_tempat" style="width: 270px;"><br>
+                <label for="jenis_kegiatan">Jenis Kegiatan</label><br>
+                <select name="jenis_kegiatan" id="jenis_kegiatan">
                     <option value='' selected disabled hidden>Pilih Jenis Kegiatan</option>
                     <% jenis.forEach(j => { %>
                         <option><%= j %></option>    
@@ -42,7 +42,7 @@
                     <option value="Lainnya">Lainnya</option> 
                 </select>
                 <input type="text" name="nama_item_lainnya" id="nama_item_lainnya" style="display: none;"><br>
-                <label for="desc_item">Deskripsi Kegiatan</label><br><textarea name="desc_item" id="desc_item" cols="35" rows="2"></textarea><br>
+                <label for="desc_kegiatan">Deskripsi Kegiatan</label><br><textarea name="desc_kegiatan" id="desc_kegiatan" cols="35" rows="2"></textarea><br>
                 <button type="submit" id="submit" class="btn btn-success">Submit Request</button>
             </div>
     </form>

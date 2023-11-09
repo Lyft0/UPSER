@@ -9,7 +9,6 @@ document.querySelector('#form-request').addEventListener('submit', () => {
     perusahaan = document.querySelector('#perusahaan').value
     no_kontak = document.querySelector('#no_kontak').value
     email = document.querySelector('#email').value
-    gedung = document.querySelector('#gedung').value
     desc_req = document.querySelector('#desc_req').value
 
     let cookies = decodeURIComponent(document.cookie.slice(9))
@@ -65,7 +64,6 @@ document.querySelector('#form-request').addEventListener('submit', () => {
                 'perusahaan': perusahaan,
                 'no_kontak': no_kontak,
                 'email': email,
-                'gedung': gedung,
                 'status': 'Waiting Approval',
                 'desc_req': desc_req,
                 'id_user_req': id_user_req,

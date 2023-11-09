@@ -16,9 +16,13 @@ document.querySelector('#form-request').addEventListener('submit', () => {
     id_user_req = cookies._id
 
     jumlah_peserta = document.querySelector('#jumlah_peserta').value
-    lokasi_kegiatan = document.querySelector('#lokasi_kegiatan').value
     tgl_mulai = document.querySelector('#tgl_mulai').value
     tgl_selesai = document.querySelector('#tgl_selesai').value    
+    jam_mulai = document.querySelector('#jam_mulai').value
+    jam_selesai = document.querySelector('#jam_selesai').value
+    nama_tempat = document.querySelector('#nama_tempat').value
+    jenis_kegiatan = document.querySelector('#jenis_kegiatan').value
+    desc_kegiatan = document.querySelector('#desc_kegiatan').value
 
     let workorder_id = "WO" + Math.floor(1000 + Math.random() * 9000).toString()
     let tgl_now = new Date()
@@ -56,13 +60,16 @@ document.querySelector('#form-request').addEventListener('submit', () => {
                 'progress_sla': '',
                 'activity': activity,
             },
-            'eventsupp_ticket':{
+            'peminjaman_ticket':{
                 'jumlah_peserta': jumlah_peserta,
-                'lokasi_kegiatan': lokasi_kegiatan,
                 'tgl_mulai': tgl_mulai,
                 'tgl_selesai': tgl_selesai,
+                'jam_mulai': jam_mulai,
+                'jam_selesai': jam_selesai,
+                'nama_tempat': nama_tempat,
+                'jenis_kegiatan': jenis_kegiatan,
+                'desc_kegiatan': desc_kegiatan,
                 'sla': 2,
-                'item_peminjaman': itemList
             }
             
         })

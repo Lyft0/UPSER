@@ -14,7 +14,6 @@ const rtkController = require('./controllers/rtkController')
 const expecourmailController = require('./controllers/expecourmailController')
 const pengajuanbeliController = require('./controllers/pengajuanbeliController')
 const userController = require('./controllers/userController')
-const ticketController = require('./controllers/ticketController')
 // import routes
 const atkRoute = require('./routes/atkRoute')
 
@@ -83,39 +82,9 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 app.post('/login-user', userController.user_login)
-// home page requester & fulfiller
+// home page requester
 app.get('/home-req', (req, res) => {
     res.render('home_requester')
 })
-app.get('/home-ful', (req, res) => {
-    res.render('home_fulfiller')
-})
-// requester page
-app.get('/my-request/:id', userController.my_request)
 app.get('/get-requester', userController.get_requester)
-// delete ticket
-app.delete('/delete-ticket/:user/:id', ticketController.delete_ticket)
-// get ticket detail
-app.post('/ticket-print', ticketController.print_ticket)
-
-// ticket-console page
-app.get('/ticket-console', userController.all_ticket)
-// one ticket request and work order
-app.get('/ticket-request/:id', ticketController.ticket_request)
-app.get('/ticket-workorder/:id', ticketController.ticket_workorder)
-app.post('/get-ticket', ticketController.get_ticket)
-
-// activity, status, priority
-app.post('/assignee', ticketController.user_assignee)
-app.post('/set_status', ticketController.set_status)
-app.post('/set_priority', ticketController.set_priority)
-app.post('/new_activity', ticketController.new_activity)
-
-// my profile
-app.get('/profile/:id', userController.profile)
-app.post('/update-profile', userController.update)
-app.get('/logout', userController.logout)
-
-// dashboard data
-app.get('/get_data/:nama', ticketController.get_data)
 
