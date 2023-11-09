@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>OFSER | Home</title>
+</head>
+<body>
+    <%- include('./partials/navbar_requester.ejs') %> 
+
+    <div class="content">
+        <p id="content-title">Office Facility Services</p>
+        <div class="services">
+            <a class="service" href="/request/atk" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/ATK.png" width="80px" style="padding: 10px; background-color: white; border-radius: 10px;" alt="atk">
+                    <p>ATK/Barang Cetakan</p>
+                </div>
+            </a>
+            <a class="service" href="/request/consum" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/Consumables.png" width="80px" style="padding: 10px; background-color: white; border-radius: 10px;" alt="consum">
+                    <p>Consumables</p>
+                </div>
+            </a>
+            <a class="service" href="/request/expecourmail" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/Expedition, Courier, & Mailing.png" width="80px" style="padding: 12px; background-color: white; border-radius: 10px;" alt="expecourmail">
+                    <p>Expedition, Courier & Mailing (Pengiriman)</p>
+                </div>
+            </a>
+            <a class="service" href="/request/pengajuanbeli" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/Pengajuan Pembelian.png" width="80px" style="padding: 12px; background-color: white; border-radius: 10px;" alt="pengajuanbeli">
+                    <p>Pengajuan Pembelian</p>
+                </div>
+            </a>
+            <a class="service" href="/request/peminjaman" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/Peminjaman.png" width="80px" style="padding: 12px; background-color: white; border-radius: 10px;" alt="peminjaman">
+                    <p>Peminjaman Ruangan/Tempat</p>
+                </div>
+            </a>
+            <a class="service" href="/request/konsumsi" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/Konsumsi.png" width="80px" style="padding: 10px; background-color: white; border-radius: 10px;" alt="konsumsi">
+                    <p>Konsumsi</p>
+                </div>
+            </a>
+            <a class="service" href="/request/rtk" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/RTK.png" width="80px" style="padding: 10px; background-color: white; border-radius: 10px;" alt="rtk">
+                    <p>Rumah Tangga Kantor</p>
+                </div>
+            </a>
+            <a class="service" href="/request/workfurn" target="_blank">
+                <div class="serv">
+                    <img src="/images/service/Workstation & Furniture.png" width="80px" style="padding: 10px; background-color: white; border-radius: 10px;" alt="workfurn">
+                    <p>Workstation & Furniture</p>
+                </div>
+            </a>
+        </div>
+    </div>
+        
+    <%- include('./partials/footer.ejs') %> 
+
+    <script src="/scripts/home/getCookies.js"></script>
+    <script>
+        document.querySelector('#profile').href = `/profile/${id_user}`
+        document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+    </script>
+</body>
+</html>
