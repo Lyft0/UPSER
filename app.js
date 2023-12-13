@@ -82,9 +82,13 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 app.post('/login-user', userController.user_login)
+
 // home page requester
 app.get('/home-req', (req, res) => {
     res.render('home_requester')
 })
+
+
+
 app.get('/get-requester', userController.get_requester)
 
