@@ -6,14 +6,15 @@ const helmet = require("helmet");
 const cookieparser = require("cookie-parser");
 const fileUpload = require('express-fileupload');
 // import controller
-const peminjamanController = require('./controllers/peminjamanController')
 const consumController = require('./controllers/consumController')
 const konsumsiController = require('./controllers/konsumsiController')
 const workfurnController = require('./controllers/workfurnController')
 const rtkController = require('./controllers/rtkController')
 const expecourmailController = require('./controllers/expecourmailController')
+const peminjamanController = require('./controllers/peminjamanController')
 const pengajuanbeliController = require('./controllers/pengajuanbeliController')
 const userController = require('./controllers/userController')
+const ticketController = require('./controllers/ticketController')
 // import routes
 const atkRoute = require('./routes/atkRoute')
 
@@ -87,8 +88,39 @@ app.post('/login-user', userController.user_login)
 app.get('/home-req', (req, res) => {
     res.render('home_requester')
 })
-
-
-
+// get requester
 app.get('/get-requester', userController.get_requester)
+
+// home page fulfiller
+app.get('/home-ful', (req, res) => {
+  res.render('home_fulfiller')
+})
+// dashboard data
+app.get('/get_data/:nama', ticketController.get_data)
+
+
+
+
+// my request page
+app.get('/my-request/:id', userController.my_request)
+app.get('/get-requester', userController.get_requester)
+// delete ticket
+app.delete('/delete-ticket/:user/:id', ticketController.delete_ticket)
+// get ticket detail
+app.post('/ticket-print', ticketController.print_ticket)
+
+// ticket-console page
+app.get('/ticket-console', userController.all_ticket)
+// one ticket request and work order
+app.get('/ticket-request/:id', ticketController.ticket_request)
+app.get('/ticket-workorder/:id', ticketController.ticket_workorder)
+app.post('/get-ticket', ticketController.get_ticket)
+
+// activity, status, priority
+app.post('/assignee', ticketController.user_assignee)
+app.post('/set_status', ticketController.set_status)
+app.post('/set_priority', ticketController.set_priority)
+app.post('/new_activity', ticketController.new_activity)
+
+
 

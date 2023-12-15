@@ -20,12 +20,12 @@ const user_login = (req, res) => {
         })
 }
 
-// const my_request = (req, res) => {
-//     Ticket.find({ id_user_req: req.params.id }).sort({ createdAt: -1 })
-//         .then((result) => {
-//             res.render('my-request', { ticket: result })
-//         })
-// }
+const my_request = (req, res) => {
+    Ticket.find({ id_user_req: req.params.id }).sort({ createdAt: -1 })
+        .then((result) => {
+            res.render('my-request', { ticket: result })
+        })  
+}
 
 const get_requester = (req, res) => {
     User.find({},{ nama:1, _id:0})
@@ -34,12 +34,12 @@ const get_requester = (req, res) => {
         })
 }
 
-// const all_ticket = (req, res) => {
-//     Ticket.find().sort({ createdAt: -1 })
-//         .then((result) => {
-//             res.render('ticket_console', { ticket: result })
-//         })
-// }
+const all_ticket = (req, res) => {
+    Ticket.find().sort({ createdAt: -1 })
+        .then((result) => {
+            res.render('ticket_console', { ticket: result })
+        })
+}
 
 // const profile = async (req, res) => {
 //     const id_user = req.params.id
@@ -72,9 +72,9 @@ const get_requester = (req, res) => {
 
 module.exports = {
     user_login,
-    // my_request,
+    my_request,
     get_requester,
-    // all_ticket,
+    all_ticket,
     // profile,
     // update,
     // logout,

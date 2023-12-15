@@ -49,7 +49,7 @@ document.querySelector('#form-request').addEventListener('submit', () => {
                 'id_user_req': id_user_req,
                 'request_id': "REQ" + Math.floor(1000 + Math.random() * 9000).toString(),
                 'workorder_id': workorder_id,
-                'assignee': 'System',
+                'assignee': '',
                 'priority': 'Not Set',
                 'progress_sla': '',
                 'activity': activity,
