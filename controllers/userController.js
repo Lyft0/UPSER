@@ -11,6 +11,8 @@ const user_login = (req, res) => {
                 res.cookie('user', result[0])
                 if(result[0].role == 'fulfiller'){
                     res.json({ redirect: '/home-ful' })
+                }else if(result[0].role == 'admin'){
+                    res.json({ redirect: '/home-admin'})
                 }else{
                     res.json({ redirect: '/home-req' })
                 }
@@ -41,41 +43,84 @@ const all_ticket = (req, res) => {
         })
 }
 
-// const profile = async (req, res) => {
-//     const id_user = req.params.id
+const profile = async (req, res) => {
+    const id_user = req.params.id
 
-//     const user = await User.findById(id_user)
-//     res.render('profile', { user: user })
-// }
+    const user = await User.findById(id_user)
+    res.render('profile', { user: user })
+}
 
-// const update = async (req, res) => {
-//     const user_update = await User.findByIdAndUpdate({_id: req.body.id_user}, {
-//         ...req.body
-//     })
-//     if(req.files){
-//         const { img } = req.files;
-//         let img_name = req.body.nama + ".png"
-//         img.mv(__dirname + '/../public/images/profile/' + img_name);
-//         const user_img = await User.findByIdAndUpdate({_id: req.body.id_user}, { image: img_name })
-//     }
-//     const user = await User.findByIdAndUpdate({_id: req.body.id_user})
+const update = async (req, res) => {
+    const user_update = await User.findByIdAndUpdate({_id: req.body.id_user}, {
+        ...req.body
+    })
+    if(req.files){
+        const { img } = req.files;
+        let img_name = req.body.nama + ".png"
+        img.mv(__dirname + '/../public/images/profile/' + img_name);
+        const user_img = await User.findByIdAndUpdate({_id: req.body.id_user}, { image: img_name })
+    }
+    const user = await User.findByIdAndUpdate({_id: req.body.id_user})
 
-//     res.clearCookie('user');
-//     res.cookie('user', await User.findById(req.body.id_user))
-//     res.render('profile', { user: user })
-// }
+    res.clearCookie('user');
+    res.cookie('user', await User.findById(req.body.id_user))
+    res.render('profile', { user: user })
+}
 
-// const logout = (req, res) => {
-//     res.clearCookie('user');
-//     res.json({ redirect: '/login' })
-// }
+const logout = (req, res) => {
+    res.clearCookie('user');
+    res.json({ redirect: '/login' })
+}
+
+const get_users = (req, res) => {
+    User.find()
+        .then((result) => {
+            res.render('users_admin', { user: result })
+        })
+}
+
+const add_user = (req, res) => {
+    const user = new User(req.body.user)
+    console.log(req.body.user)
+
+    user.save()
+        .then((result) => {
+            res.json({ redirect: '/users-admin'})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+const update_user = async (req, res) => {
+    console.log(req.body)
+    const user_update = await User.findByIdAndUpdate({_id: req.body.id}, {
+        ...req.body.user
+    })
+    const user = await User.find()
+    res.json({ redirect: '/users-admin'})
+}
+
+const delete_user = async (req, res) => {
+    User.findByIdAndDelete(req.params.id_user)
+        .then(result => {
+            res.json({ redirect: "/users-admin" })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
 
 module.exports = {
     user_login,
     my_request,
     get_requester,
     all_ticket,
-    // profile,
-    // update,
-    // logout,
+    profile,
+    update,
+    logout,
+    get_users,
+    add_user,
+    update_user,
+    delete_user,
 }

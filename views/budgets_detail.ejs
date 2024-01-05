@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>OFSER | Budgets Detail</title>
+</head>
+<body>
+    <div class="content-admin">
+        <div class="sidebar-admin">
+            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">OFSER</p>
+            
+            <div class="info-admin">
+                <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
+                <p style="font-weight: bold;">Admin Lyft</p>
+            </div>
+
+            <div class="fitur-admin">
+                <a class="fitur-list-admin" href="/home-admin">
+                    <img src="/images/icon/dashboard.png" alt="dash" width="17px">
+                    Dashboard
+                </a>
+                <a class="fitur-list-admin" href="/users-admin">
+                    <img src="/images/icon/users.png" alt="user" width="17px">
+                    Users
+                </a>
+                <a class="fitur-list-admin" href="/budgets-admin" style="background-color: rgb(104, 104, 104); color: white; font-weight:100;">
+                    <img src="/images/icon/budgets.png" alt="budget" width="17px" style="filter: invert(1);">
+                    Budgets
+                </a>
+                <a class="fitur-list-admin" href="#">
+                    <img src="/images/icon/products.png" alt="product" width="17px">
+                    Products
+                </a>
+
+                <a id="logout-admin" href="#">
+                    <img src="/images/icon/logout.png" alt="log" width="17px" style="filter: invert(1);">
+                    Log Out
+                </a>
+            </div>
+        </div>
+
+
+        <div class="main-admin">
+            <p id="content-title">Budgets Management</p>
+            <p style="font-size: 1.2em; margin-top: 20px;">hr</p>
+
+
+        </div>
+
+    </div>
+
+    <%- include('./partials/footer.ejs') %> 
+
+
+    <script src="/scripts/home/getCookies.js"></script>
+    <script src="/scripts/home/adminModal.js"></script>
+    
+    <script>
+        document.querySelector('#profile').href = `/profile/${id_user}`
+        document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+1. buat halaman profil untuk semuanya [DONE]
+2. buat halaman home admin [DONE]
+3. buat halaman manajemen akun admin [DONE]
+4. buat halaman manajemen anggaran admin
+5. tambahkan collection prodi dengan properti
+    - nama prodi
+    - anggaran
+6. buat halaman manajemen barang admin untuk menambah, edit, hapus barang
+7. tambahkan properti harga pada collection semua service
+8. edit halaman semua form service dengan menambahkan biaya dan tabel total biaya

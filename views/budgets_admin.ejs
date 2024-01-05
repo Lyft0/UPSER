@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/jstable.css">
+    <script type="text/javascript" src="/jstable.min.js"></script>
+    <title>OFSER | Budgets</title>
+</head>
+<body>
+    <!-- <%- include('./partials/navbar_requester.ejs') %>  -->
+
+    <div class="content-admin">
+        <div class="sidebar-admin">
+            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">OFSER</p>
+            
+            <div class="info-admin">
+                <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
+                <p style="font-weight: bold;">Admin Lyft</p>
+            </div>
+
+            <div class="fitur-admin">
+                <a class="fitur-list-admin" href="/home-admin">
+                    <img src="/images/icon/dashboard.png" alt="dash" width="17px">
+                    Dashboard
+                </a>
+                <a class="fitur-list-admin" href="/users-admin">
+                    <img src="/images/icon/users.png" alt="user" width="17px">
+                    Users
+                </a>
+                <a class="fitur-list-admin" href="/budgets-admin" style="background-color: rgb(104, 104, 104); color: white; font-weight:100;">
+                    <img src="/images/icon/budgets.png" alt="budget" width="17px" style="filter: invert(1);">
+                    Budgets
+                </a>
+                <a class="fitur-list-admin" href="#">
+                    <img src="/images/icon/products.png" alt="product" width="17px">
+                    Products
+                </a>
+
+                <a id="logout-admin" href="#">
+                    <img src="/images/icon/logout.png" alt="log" width="17px" style="filter: invert(1);">
+                    Log Out
+                </a>
+            </div>
+        </div>
+
+
+        <div class="main-admin">
+            <p id="content-title">Budgets Management</p>
+            <p style="font-size: 1.2em; margin-top: 20px;">Daftar Prodi</p>
+
+            <div class="list-prodi">
+                <% anggaran.forEach(a => { %> 
+                    <a class="prodi-card" href="/budget-detail/<%= a._id %>">
+                        <img src="/images/background-img/<%= a.nama_prodi %>.jpg" alt="cs">
+                        <div class="card-content">
+                            <p style="font-size: 1.3em;"><%= a.nama_prodi %></p>
+                            <p style="font-size: 0.8em;"><%= a.fakultas %></p>
+                        </div>
+                    </a>
+                <% }) %>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <%- include('./partials/footer.ejs') %> 
+
+    <script>
+        let myTable = new JSTable("#table-user");
+    </script>
+
+    <script src="/scripts/home/getCookies.js"></script>
+    <script src="/scripts/home/adminModal.js"></script>
+    
+    <script>
+        document.querySelector('#profile').href = `/profile/${id_user}`
+        document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+    </script>
+</body>
+</html>

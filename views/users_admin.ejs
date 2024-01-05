@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/jstable.css">
+    <script type="text/javascript" src="/jstable.min.js"></script>
+    <title>OFSER | Users</title>
+</head>
+<body>
+    <!-- <%- include('./partials/navbar_requester.ejs') %>  -->
+
+    <div class="content-admin">
+        <div class="sidebar-admin">
+            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">OFSER</p>
+            
+            <div class="info-admin">
+                <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
+                <p style="font-weight: bold;">Admin Lyft</p>
+            </div>
+
+            <div class="fitur-admin">
+                <a class="fitur-list-admin" href="/home-admin">
+                    <img src="/images/icon/dashboard.png" alt="dash" width="17px">
+                    Dashboard
+                </a>
+                <a class="fitur-list-admin" href="/users-admin" style="background-color: rgb(104, 104, 104); color: white; font-weight:100;">
+                    <img src="/images/icon/users.png" alt="user" width="17px" style="filter: invert(1);">
+                    Users
+                </a>
+                <a class="fitur-list-admin" href="/budgets-admin">
+                    <img src="/images/icon/budgets.png" alt="budget" width="17px">
+                    Budgets
+                </a>
+                <a class="fitur-list-admin" href="#">
+                    <img src="/images/icon/products.png" alt="product" width="17px">
+                    Products
+                </a>
+
+                <a id="logout-admin" href="#">
+                    <img src="/images/icon/logout.png" alt="log" width="17px" style="filter: invert(1);">
+                    Log Out
+                </a>
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-admin">
+            <p id="content-title">Users Management</p>
+            
+            <button id="add-user">+ Add New User</button>
+
+            <div class="table-user">
+                <table border="1" id="table-user" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr style="background-color: rgb(92, 92, 92); color: white"><th>Nama</th><th>No. Pekerja</th><th>Role</th><th>Pekerjaan</th><th>Fungsi</th><th>Departemen</th><th>Opsi</th></tr>
+                    </thead>
+                    <tbody id="tbody">      
+                        <% let i=1 %> 
+                        <% user.forEach(u => { %>
+                            <tr id="row-<%= i %>">
+                                <td style="vertical-align: middle;"><%= u.nama %></td>
+                                <td style="text-align: center; vertical-align: middle;"><%= u.no_pekerja %></td>
+                                <td style="text-align: center; vertical-align: middle; text-transform: capitalize;"><%= u.role %></td>
+                                <td style="vertical-align: middle;"><%= u.pekerjaan %></td>
+                                <td style="vertical-align: middle;"><%= u.fungsi %></td>
+                                <td style="vertical-align: middle;"><%= u.departemen %></td>
+                                <td><button class="edit-user" data-user=<%= i %>>Edit</button>
+                                    <button class="del-user" data-user=<%= u._id %>>Delete</button></td>
+                            </tr>
+                            <!-- modal -->
+                            <div class="modal modal-edit-<%= i %>">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span class="close close-edit-<%= i %>">&times;</span>
+                                    </div>
+                                    <div class="modal-body modal-user-admin">
+                                        <p style="font-size: 1.5em; font-weight: bold; margin-bottom: 25px;">Edit User</p>
+                                        <div class="edit-req-user" data-user=<%= u._id %>>
+                                            <div class="f3">
+                                                <p>Nama:</p>
+                                                <input type="text" name="nama" class="nama" value="<%= u.nama %>">
+                                                <p>No. Pekerja:</p>
+                                                <input type="text" name="no_pekerja" class="no_pekerja" value="<%= u.no_pekerja %>">
+                                                <p>Role:</p>
+                                                <select name="role" class="role">
+                                                    <option value="admin" <%= (u.role == 'admin') ? "selected" : "" %>>Admin</option>
+                                                    <option value="fulfiller" <%= (u.role == 'fulfiller') ? "selected" : "" %>>Fulfiller</option>
+                                                    <option value="requester" <%= (u.role == 'requester') ? "selected" : "" %>>Requester</option>
+                                                </select>
+                                                <p>Pekerjaan:</p>
+                                                <input type="text" name="pekerjaan" class="pekerjaan" value="<%= u.pekerjaan %>">
+                                                <p>Fungsi:</p>
+                                                <input type="text" name="fungsi" class="fungsi" value="<%= u.fungsi %>">
+                                                <p>Departemen:</p>
+                                                <input type="text" name="departemen" class="departemen" value="<%= u.departemen %>">
+                                            </div>
+                                            <div class="f4">
+                                                <p>No. Kontak:</p>
+                                                <input type="text" name="no_kontak" class="no_kontak" value="<%= u.no_kontak %>">
+                                                <p>Email:</p>
+                                                <input type="email" name="new-email" class="new-email" value="<%= u.email %>">
+                                                <p>Password:</p>
+                                                <input type="password" name="new-pass" class="new-pass" value="<%= u.password %>"><br>
+                                                <button type="submit" class="btn-update" data-image="<%= u.image %>">Update User</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                              
+                            <% i += 1 %> 
+                        <% }); %>     
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal modal-add-user">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close close-add">&times;</span>
+                    </div>
+                    <div class="modal-body modal-user-admin">
+                        <p style="font-size: 1.5em; font-weight: bold; margin-bottom: 25px;">Add New User</p>
+                        <form id="add-req-user">
+                            <div class="f1">
+                                <p>Nama:</p>
+                                <input type="text" name="nama" id="nama">
+                                <p>No. Pekerja:</p>
+                                <input type="text" name="no_pekerja" id="no_pekerja">
+                                <p>Role:</p>
+                                <select name="role" id="role">
+                                    <option value="admin">Admin</option>
+                                    <option value="fulfiller">Fulfiller</option>
+                                    <option value="requester">Requester</option>
+                                </select>
+                                <p>Pekerjaan:</p>
+                                <input type="text" name="pekerjaan" id="pekerjaan">
+                                <p>Fungsi:</p>
+                                <input type="text" name="fungsi" id="fungsi">
+                                <p>Departemen:</p>
+                                <input type="text" name="departemen" id="departemen">
+                            </div>
+                            <div class="f2">
+                                <p>No. Kontak:</p>
+                                <input type="text" name="no_kontak" id="no_kontak">
+                                <p>Email:</p>
+                                <input type="email" name="new-email" id="new-email">
+                                <p>Password:</p>
+                                <input type="password" name="new-pass" id="new-pass"><br>
+                                <button type="submit" class="btn-submit">Create User</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <%- include('./partials/footer.ejs') %> 
+
+    <script>
+        let myTable = new JSTable("#table-user");
+    </script>
+
+    <script src="/scripts/home/getCookies.js"></script>
+    <script src="/scripts/home/adminModal.js"></script>
+    
+    <script>
+        document.querySelector('#profile').href = `/profile/${id_user}`
+        document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+    </script>
+</body>
+</html>

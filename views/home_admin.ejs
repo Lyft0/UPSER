@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>OFSER | Home Admin</title>
+</head>
+<body>
+    <!-- <%- include('./partials/navbar_requester.ejs') %>  -->
+
+    <div class="content-admin">
+        <div class="sidebar-admin">
+            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">OFSER</p>
+            
+            <div class="info-admin">
+                <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
+                <p style="font-weight: bold;">Admin Lyft</p>
+            </div>
+
+            <div class="fitur-admin">
+                <a class="fitur-list-admin" href="/home-admin" style="background-color: rgb(104, 104, 104); color: white; font-weight:100;">
+                    <img src="/images/icon/dashboard.png" alt="dash" width="17px" style="filter: invert(1);">
+                    Dashboard
+                </a>
+                <a class="fitur-list-admin" href="/users-admin">
+                    <img src="/images/icon/users.png" alt="user" width="17px">
+                    Users
+                </a>
+                <a class="fitur-list-admin" href="/budgets-admin">
+                    <img src="/images/icon/budgets.png" alt="budget" width="17px">
+                    Budgets
+                </a>
+                <a class="fitur-list-admin" href="#">
+                    <img src="/images/icon/products.png" alt="product" width="17px">
+                    Products
+                </a>
+
+                <a id="logout-admin" href="#">
+                    <img src="/images/icon/logout.png" alt="log" width="17px" style="filter: invert(1);">
+                    Log Out
+                </a>
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-admin">
+            <p id="content-title">Dashboard</p>
+            <p style="font-size: 1.2em;">Welcome, <span id="user-name" style="font-weight: 400;"></span></p>
+            <div class="vis-admin">
+                <div class="vis1" style="background-color:white; height: 100%; width: 55%; padding: 20px; border-radius: 10px;">
+                    <p style="margin-bottom: 30px;">Tickets Backlog</p>
+                    <div class="loader"></div>
+                    <canvas id="chart-3" style="width: 10px; height: 0.46em"></canvas>
+                </div>
+
+                
+                <div class="vis2" style="height: 100%; width: 45%;display: flex; flex-direction: column; gap: 15px;">
+                    <div style="background-color: white;height: 50%; width: 100%; padding: 20px; border-radius: 10px;">
+                        <p style="margin-bottom: 10px;">Tickets Status</p>
+                        <div class="loader"></div>
+                        <canvas id="chart-2" style="width: 100%; height: 150px"></canvas>
+                    </div>
+
+                    <div style="background-color: white;height: 50%; width: 100%; padding: 20px;border-radius: 10px;">
+                        <p style="margin-bottom: 10px;">Tickets By Service</p>
+                        <div class="loader"></div>
+                        <canvas id="chart-1" style="width: 100%; height: 140px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <%- include('./partials/footer.ejs') %> 
+
+    <script src="/scripts/home/getCookies.js"></script>
+    <script src="/scripts/home/getData_admin.js"></script>
+    <script src="/scripts/home/visualize.js"></script>
+    <script>
+        document.querySelector('#profile').href = `/profile/${id_user}`
+        document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+    </script>
+</body>
+</html>

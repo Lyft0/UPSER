@@ -631,8 +631,6 @@ body {
     height: 23px;
     width: 120px;
 }
-
-
 /* Sliding SLA */
 input[type="range"] {
     -webkit-appearance: none;
@@ -833,5 +831,216 @@ input[type="range"]::-webkit-slider-thumb {
 #table-ticket > th, td {
     border-color: #5dcece;
 }
+
+/* //---> Admin Page */
+.content-admin {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.sidebar-admin {
+    height: auto;
+    background-color: #ffffff;
+    width: 300px;
+}
+.info-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0 40px 0;
+    gap: 15px;
+}
+.fitur-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.fitur-list-admin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 220px;
+    gap: 17px;
+    padding: 15px 15px 15px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    border-radius: 0 15px 15px 0;
+} 
+.fitur-list-admin:hover {
+    background-color: #b5b5b5;
+}
+#logout-admin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 220px;
+    gap: 17px;
+    padding: 15px 15px 15px 30px;
+    text-decoration: none;
+    margin-top: 50px;
+    color: white;
+    background-color: rgb(255, 83, 83);
+    border-radius: 0 15px 15px 0;
+}
+#logout-admin:hover {
+    background-color: rgb(251, 48, 48);
+}
+
+.main-admin {
+    display: flex;
+    flex-direction: column;
+    background-color: #EBEFF2;
+    width: 100%;
+    height: auto;
+    padding: 30px 30px 30px 40px;
+}
+#content-title {
+    font-size: 1.5em;
+}
+.vis-admin {
+    display: flex;
+    flex-direction: row;
+    margin-top: 28px;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+}
+
+/* //---> Users Page */
+.table-user > table {
+    background-color: white;
+}
+
+.edit-user, .del-user {
+    width: 60px;
+    padding: 5px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: white;
+    border: 1px solid rgb(107, 107, 107);
+    cursor: pointer;
+}
+.edit-user {
+    margin-left: 8px;
+    margin-right: 8px;
+    background-color: rgb(70, 70, 245);
+}
+.edit-user:hover {
+    background-color: rgb(17, 17, 252);
+}
+.del-user {
+    background-color: rgb(220, 63, 63);
+}
+.del-user:hover {
+    background-color: rgb(172, 12, 12);
+}
+
+#add-user {
+    font-size: 1em;
+    width: 150px;
+    height: 40px;
+    color: white;
+    background-color: rgb(15, 113, 194);
+    border-radius: 15px;
+    cursor: pointer;
+}
+#add-user:hover {
+    background-color: rgb(2, 72, 129);
+}
+.modal-user-admin {
+    padding: 30px;
+}
+#add-req-user {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+}
+#add-req-user > div > input {
+    width: 250px;
+    height: 25px;
+    margin: 5px 0 10px 0;
+    font-size: 1em;
+}
+.f1 > #role {
+    width: 250px;
+    height: 25px;
+    margin: 5px 0 10px 0;
+    font-size: 1em;
+}
+.btn-submit, .btn-update {
+    width: 150px;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 10px;
+    color: white; 
+    background-color: #0c09ca;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.edit-req-user {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+}
+.edit-req-user > div > input {
+    width: 250px;
+    height: 25px;
+    margin: 5px 0 10px 0;
+    font-size: 1em;
+}
+.f3 > .role {
+    width: 250px;
+    height: 25px;
+    margin: 5px 0 10px 0;
+    font-size: 1em;
+}
+
+/* // ---> Budgets page */
+
+.list-prodi {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.prodi-card {
+    color: white;
+    background-color: #555555;
+    width: 300px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 300ms;
+    cursor: pointer;
+    text-decoration: none;
+  }
+.prodi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+.prodi-card img {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+  }
+.card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0 0 15px;
+    gap: 8px;
+}
+
+
+
 
 

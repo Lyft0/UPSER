@@ -15,6 +15,7 @@ const peminjamanController = require('./controllers/peminjamanController')
 const pengajuanbeliController = require('./controllers/pengajuanbeliController')
 const userController = require('./controllers/userController')
 const ticketController = require('./controllers/ticketController')
+const anggaranController = require('./controllers/anggaranController')
 // import routes
 const atkRoute = require('./routes/atkRoute')
 
@@ -121,6 +122,25 @@ app.post('/assignee', ticketController.user_assignee)
 app.post('/set_status', ticketController.set_status)
 app.post('/set_priority', ticketController.set_priority)
 app.post('/new_activity', ticketController.new_activity)
+
+// my profile
+app.get('/profile/:id', userController.profile)
+app.post('/update-profile', userController.update)
+app.get('/logout', userController.logout)
+
+
+// home page admin
+app.get('/home-admin', (req, res) => {
+  res.render('home_admin')
+})
+// users admin
+app.get('/users-admin', userController.get_users)
+app.post('/add-user', userController.add_user)
+app.post('/update-user', userController.update_user)
+app.delete('/delete-user/:id_user', userController.delete_user)
+// budgest admin
+app.get('/budgets-admin', anggaranController.get_anggaran)
+app.get('/budget-detail/:id', anggaranController.detail_anggaran)
 
 
 
