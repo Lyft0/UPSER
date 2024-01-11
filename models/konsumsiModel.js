@@ -5,6 +5,7 @@ const Schema = mongoose.Schema // Schema object
 const konsumsiSchema = new Schema({ // instance dari Schema
     nama_paket: {type: String, required: true},
     jenis_konsumsi: {type: String, required: true},
+    harga: {type: Number, required: true},
 }) // constructor untuk generate timestamp update
 
 // model konsumsi untuk digunakan save, get, delete data

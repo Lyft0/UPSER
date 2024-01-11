@@ -120,7 +120,6 @@ document.querySelectorAll('.btn-update').forEach(element => {
     })
   })
 
-
 document.querySelectorAll('.del-user').forEach(element => {
     element.addEventListener('click', (event) => {
         const id_user = event.currentTarget.dataset.user

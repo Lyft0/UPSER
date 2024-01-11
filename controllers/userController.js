@@ -30,7 +30,8 @@ const my_request = (req, res) => {
 }
 
 const get_requester = (req, res) => {
-    User.find({},{ nama:1, _id:0})
+    let fungsi = req.params.fungsi
+    User.find({ fungsi: fungsi },{ nama:1, _id:0})
         .then((result) => {
             res.json({ requester: result })
         })

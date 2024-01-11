@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>OFSER | Products</title>
+</head>
+<body>
+    <!-- <%- include('./partials/navbar_requester.ejs') %>  -->
+
+    <div class="content-admin">
+        <div class="sidebar-admin">
+            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">OFSER</p>
+            
+            <div class="info-admin">
+                <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
+                <p style="font-weight: bold;">Admin Lyft</p>
+            </div>
+
+            <div class="fitur-admin">
+                <a class="fitur-list-admin" href="/home-admin">
+                    <img src="/images/icon/dashboard.png" alt="dash" width="17px">
+                    Dashboard
+                </a>
+                <a class="fitur-list-admin" href="/users-admin">
+                    <img src="/images/icon/users.png" alt="user" width="17px">
+                    Users
+                </a>
+                <a class="fitur-list-admin" href="/budgets-admin">
+                    <img src="/images/icon/budgets.png" alt="budget" width="17px">
+                    Budgets
+                </a>
+                <a class="fitur-list-admin" href="/products-admin" style="background-color: rgb(104, 104, 104); color: white; font-weight:100;">
+                    <img src="/images/icon/products.png" alt="product" width="17px" style="filter: invert(1);">
+                    Products
+                </a>
+
+                <a id="logout-admin" href="#">
+                    <img src="/images/icon/logout.png" alt="log" width="17px" style="filter: invert(1);">
+                    Log Out
+                </a>
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-admin">
+            <p id="content-title">Products Management</p>
+            
+            <p style="font-size: 1.1em; margin: 10px 0 10px 0;">Kategori Produk</p>
+            <select name="product-list" id="product-list" style="width: 200px; padding: 5px; font-size: 0.9em;">
+                <option value='' selected disabled hidden>Pilih Kategori Produk</option>
+                <option value="atk">ATK</option>
+                <option value="consum">Consumables</option>
+                <option value="konsumsi">Konsumsi</option>
+                <option value="rtk">RTK</option>
+                <option value="workfurn">Workstation & Furniture</option>
+            </select>
+
+            <p style="font-size: 1.1em; margin: 20px 0 10px 0;">Daftar Produk</p>
+
+            <p id="nodata" style="color: rgb(241, 15, 15); width: fit-content;">No Data Shown</p>
+
+            <button id="add-prod" style="margin-bottom: 7px; display: none;">+ Add New Product</button>
+
+            <div class="table-product">
+                <table id="table-product" style="display: none;">
+                    <thead>
+                        <tr style="background-color: rgb(92, 92, 92); color: white;"></tr>
+                    </thead>
+                    <tbody id="tbody">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <button id="update-prod" style="margin-top: 15px; display: none;">Update Products</button>
+        </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %> 
+
+
+    <script src="/scripts/product/getProduct.js"></script>
+
+    <script src="/scripts/home/getCookies.js"></script>
+
+    
+    <script>
+        document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+    </script>
+</body>
+</html>

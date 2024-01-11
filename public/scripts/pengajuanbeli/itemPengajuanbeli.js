@@ -21,6 +21,7 @@ document.querySelector('#add-item').addEventListener('click', () => {
         
         var table = document.getElementById("item-list")
         var row = table.insertRow(-1)
+        row.style.fontSize = "0.8em"
         var jenis_td = row.insertCell(0)
         var jumlah_td = row.insertCell(1)
         var harga_td = row.insertCell(2)

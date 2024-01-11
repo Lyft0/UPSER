@@ -7,8 +7,7 @@ const RtkTicket = require('../models/rtkTicketModel');
 const rtk_jenis = (req, res) => {
     Rtk.find()
         .then((result) => {
-            const jenis_produk = result.map(item => item.jenis_produk)
-            res.render('request_form/rtk_request', { jenis_produk: jenis_produk.sort()}) // render file dengan view engine
+            res.render('request_form/rtk_request', { jenis_produk: result.sort()}) // render file dengan view engine
         })
         .catch((error) => {
             console.log(error)

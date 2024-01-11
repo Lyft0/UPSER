@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/jstable.css">
+    <script type="text/javascript" src="/jstable.min.js"></script>
     <title>OFSER | Budgets Detail</title>
 </head>
 <body>
@@ -13,7 +15,7 @@
             
             <div class="info-admin">
                 <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
-                <p style="font-weight: bold;">Admin Lyft</p>
+                <p id="user-name" style="font-weight: bold;"></p>
             </div>
 
             <div class="fitur-admin">
@@ -29,7 +31,7 @@
                     <img src="/images/icon/budgets.png" alt="budget" width="17px" style="filter: invert(1);">
                     Budgets
                 </a>
-                <a class="fitur-list-admin" href="#">
+                <a class="fitur-list-admin" href="/products-admin">
                     <img src="/images/icon/products.png" alt="product" width="17px">
                     Products
                 </a>
@@ -41,10 +43,89 @@
             </div>
         </div>
 
-
         <div class="main-admin">
             <p id="content-title">Budgets Management</p>
-            <p style="font-size: 1.2em; margin-top: 20px;">hr</p>
+
+            <div class="info-prodi-detail">
+                <div class="info-prodi" style="border-top: 1px solid black;" data-prodi="<%= anggaran._id %>">
+                    <p style="font-size: 1.2em; margin: 20px 0 6px 0; font-weight: bold;"><%= anggaran.nama_prodi %></p>
+                    <p><%= anggaran.fakultas %></p>
+                </div>
+
+                <div style="display: flex; flex-direction: row; gap: 18px;">
+                    <div class="info-anggaran">
+                        <p>Total Anggaran</p>
+                        <span id="anggaran">Rp.<span id="total_anggaran"><%= Intl.NumberFormat().format(anggaran.total_anggaran) %></span></span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <button id="add-anggaran">+ Penyetoran</button>
+                        <button id="dec-anggaran">- Pengeluaran</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal modal-tambah">
+                <div class="modal-content" style="height: 500px;">
+                    <div class="modal-header">
+                        <span class="close close-tambah">&times;</span>
+                    </div>
+                    <div class="modal-body modal-user-admin">
+                        <p style="font-size: 1.5em; font-weight: bold; margin-bottom: 25px;">Penyetoran Anggaran</p>
+                        <p style="margin-bottom: 10px;">Jumlah Penyetoran Anggaran</p>
+                        <div style="display: flex; flex-direction: row; margin-bottom: 15px;">
+                            <span style="padding: 10px;background-color: dimgray; color: white; text-align: center; vertical-align:middle;">Rp.</span>
+                            <input id="jumlah_tambah" placeholder="Masukkan Jumlah" style="width: 300px; font-size: 1em; padding: 10px;">
+                        </div>
+                        <p style="margin-bottom: 10px;">Deskripsi</p>
+                        <textarea name="desc_tambah" id="desc_tambah" style="font-size: 1em; padding: 10px; width: 500px; height: 140px; margin-bottom: 15px;" placeholder="Tambahkan dekripsi penyetoran anggaran"></textarea>
+
+                        <button id="add-anggaran" class="req-add-ang" style="width: 200px;">Setor Anggaran</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal modal-kurang">
+                <div class="modal-content" style="height: 500px;">
+                    <div class="modal-header">
+                        <span class="close close-kurang">&times;</span>
+                    </div>
+                    <div class="modal-body modal-user-admin">
+                        <p style="font-size: 1.5em; font-weight: bold; margin-bottom: 25px;">Pengeluaran Anggaran</p>
+                        <p style="margin-bottom: 10px;">Jumlah Pengeluaran Anggaran</p>
+                        <div style="display: flex; flex-direction: row; margin-bottom: 15px;">
+                            <span style="padding: 10px;background-color: dimgray; color: white; text-align: center; vertical-align:middle;">Rp.</span>
+                            <input id="jumlah_kurang" placeholder="Masukkan Jumlah" style="width: 300px; font-size: 1em; padding: 10px;">
+                        </div>
+                        <p style="margin-bottom: 10px;">Deskripsi</p>
+                        <textarea name="desc_kurang" id="desc_kurang" style="font-size: 1em; padding: 10px; width: 500px; height: 140px; margin-bottom: 15px;" placeholder="Tambahkan dekripsi Pengeluaran anggaran"></textarea>
+
+                        <button id="dec-anggaran" class="req-dec-ang" style="width: 200px;">Kurang Anggaran</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="riwayat-prodi" style="margin-top: 20px;">
+                <p>Riwayat Anggaran</p>
+
+                <div class="table-user">
+                    <table border="1" id="table-user" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead style="background-color: rgb(83, 83, 83); color: white; font-size: 0.9em;"><th>Nama</th><th>Layanan</th><th>Tanggal</th><th>Deskripsi</th><th>Total Biaya</th></thead>
+                        <tbody id="tbody">
+                            <% anggaran.riwayat.forEach(e => { %>
+                                    <tr style="font-size: 0.9em;">
+                                        <td><%= e.nama %></td>
+                                        <td><%= e.layanan %></td>
+                                        <td><%= e.tanggal %></td>
+                                        <td><%= e.deskripsi %></td>
+                                        <td><%= e.total_biaya %></td>
+                                    </tr>
+                            <% }); %>
+
+                        </tbody> 
+                    </table>
+                </div>
+
+            </div>
 
 
         </div>
@@ -53,11 +134,30 @@
 
     <%- include('./partials/footer.ejs') %> 
 
+    <script>
+        let myTable = new JSTable("#table-user");
+    </script>
 
     <script src="/scripts/home/getCookies.js"></script>
-    <script src="/scripts/home/adminModal.js"></script>
+    <script src="/scripts/budget/budgetModal.js"></script>
+    <script src="/scripts/budget/budgetRequest.js"></script>
     
     <script>
+        document.getElementById('jumlah_tambah').addEventListener('input', function(event) {
+            let inputValue = event.target.value;
+            inputValue = inputValue.replace(/\D/g, '');
+            event.target.value = formatNumber(inputValue);
+        });
+        document.getElementById('jumlah_kurang').addEventListener('input', function(event) {
+            let inputValue = event.target.value;
+            inputValue = inputValue.replace(/\D/g, '');
+            event.target.value = formatNumber(inputValue);
+        });
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+
         document.querySelector('#profile').href = `/profile/${id_user}`
         document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
     </script>

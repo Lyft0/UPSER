@@ -16,7 +16,7 @@ jenisAtk.addEventListener('change', () => {
             listAtk.innerHTML = `<option value='' selected disabled hidden>Pilih Produk</option>`
 
             document.querySelector('#jumlah').value = 1
-
+            document.getElementById('harga').textContent = 0
             if (Object.keys(data.produk).length == 0) {
                 listAtk.style.display = 'none'
                 document.querySelector('#nama_atk_lainnya').style.display = 'inline'
@@ -29,7 +29,7 @@ jenisAtk.addEventListener('change', () => {
                     const option = document.createElement('option')
                     option.value = produk.nama_produk
                     option.textContent = produk.nama_produk
-                    option.dataset.jumlah = produk.jumlah
+                    option.dataset.harga = produk.harga
                     listAtk.appendChild(option)
                 });
             }
@@ -40,5 +40,6 @@ jenisAtk.addEventListener('change', () => {
 });
 
 listAtk.addEventListener('change', () => {
-    document.querySelector('#jumlah').max = listAtk.options[listAtk.selectedIndex].dataset.jumlah
+    document.querySelector('#harga').textContent = Intl.NumberFormat().format(listAtk.options[listAtk.selectedIndex].dataset.harga)
+
 })

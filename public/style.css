@@ -1002,6 +1002,58 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 1em;
 }
 
+/* // ---> Product Page */
+#add-prod {
+    font-size: 0.9em;
+    width: 150px;
+    padding: 5px;
+    background-color: #2b8ccc;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#add-prod:hover {
+    background-color: #0e5483;
+}
+
+#update-prod {
+    font-size: 0.9em;
+    width: 150px;
+    padding: 5px;
+    background-color: #00c15a;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#update-prod:hover {
+    background-color: #079217;
+}
+
+#table-product > thead > tr > th {
+    padding: 5px;
+}
+#table-product, #table-product > tbody > tr > td, #table-product > thead > tr > th {
+    border: 1px solid rgb(198, 198, 198);
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+#table-product > tbody > tr > td > input {
+    font-size: 0.95em;
+    padding: 5px;
+}
+#table-product > tbody > tr > td {
+    background-color: white;
+}
+#table-product > tbody > tr > td > .del-prod {
+    background-color: rgb(196, 41, 41);
+    font-size: 0.9em;
+    color: white;
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+}
+
+
 /* // ---> Budgets page */
 
 .list-prodi {
@@ -1010,7 +1062,6 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: 20px;
     gap: 20px;
 }
-
 .prodi-card {
     color: white;
     background-color: #555555;
@@ -1023,7 +1074,7 @@ input[type="range"]::-webkit-slider-thumb {
     transition: all 300ms;
     cursor: pointer;
     text-decoration: none;
-  }
+}
 .prodi-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -1040,7 +1091,45 @@ input[type="range"]::-webkit-slider-thumb {
     gap: 8px;
 }
 
+.info-prodi {
+    margin-bottom: 20px;
+}
 
+.info-anggaran {
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    width: 230px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 300ms;
+}
+.info-anggaran:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+#anggaran {
+    font-size: 1.3em;
+    font-weight: bold;
+}
 
-
+#add-anggaran, #dec-anggaran {
+    font-weight: bold;
+    padding: 15px;
+    font-size: 0.9em;
+    color: white;
+    background-color: #3ca3e8;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 300ms;
+}
+#add-anggaran:hover, #dec-anggaran:hover {
+    background-color: #0565a5;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
 

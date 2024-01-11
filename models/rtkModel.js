@@ -3,7 +3,8 @@ const Schema = mongoose.Schema // Schema object
 
 // rtk schema dengan property
 const rtkSchema = new Schema({ // instance dari Schema
-    jenis_produk: {type: String, required: true},
+    nama_produk: {type: String, required: true},
+    harga: {type: Number, required: true},
 }) // constructor untuk generate timestamp update
 
 // model rtk untuk digunakan save, get, delete data

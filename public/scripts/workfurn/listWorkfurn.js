@@ -16,7 +16,8 @@ jenisWorkfurn.addEventListener('change', () => {
             listWorkfurn.innerHTML = `<option value='' selected disabled hidden>Pilih Produk</option>`
 
             document.querySelector('#jumlah').value = 1
-
+            document.getElementById('harga').textContent = 0
+            
             if (Object.keys(data.produk).length == 0) {
                 listWorkfurn.style.display = 'none'
                 document.querySelector('#nama_workfurn_lainnya').style.display = 'inline'
@@ -30,6 +31,7 @@ jenisWorkfurn.addEventListener('change', () => {
                     option.value = produk.nama_produk
                     option.textContent = produk.nama_produk
                     option.dataset.jumlah = produk.jumlah
+                    option.dataset.harga = produk.harga
                     listWorkfurn.appendChild(option)
                 });
             }
@@ -41,4 +43,5 @@ jenisWorkfurn.addEventListener('change', () => {
 
 listWorkfurn.addEventListener('change', () => {
     document.querySelector('#jumlah').max = listWorkfurn.options[listWorkfurn.selectedIndex].dataset.jumlah
+    document.querySelector('#harga').textContent = Intl.NumberFormat().format(listWorkfurn.options[listWorkfurn.selectedIndex].dataset.harga)
 })

@@ -16,6 +16,7 @@ const pengajuanbeliController = require('./controllers/pengajuanbeliController')
 const userController = require('./controllers/userController')
 const ticketController = require('./controllers/ticketController')
 const anggaranController = require('./controllers/anggaranController')
+const productController = require('./controllers/productController')
 // import routes
 const atkRoute = require('./routes/atkRoute')
 
@@ -90,7 +91,7 @@ app.get('/home-req', (req, res) => {
     res.render('home_requester')
 })
 // get requester
-app.get('/get-requester', userController.get_requester)
+app.get('/get-requester/:fungsi', userController.get_requester)
 
 // home page fulfiller
 app.get('/home-ful', (req, res) => {
@@ -141,6 +142,10 @@ app.delete('/delete-user/:id_user', userController.delete_user)
 // budgest admin
 app.get('/budgets-admin', anggaranController.get_anggaran)
 app.get('/budget-detail/:id', anggaranController.detail_anggaran)
-
-
+app.post('/add-budget', anggaranController.add_anggaran)
+app.post('/dec-budget', anggaranController.dec_anggaran)
+// product admin
+app.get('/products-admin', productController.page)
+app.get('/get-product/:type', productController.get_product)
+app.post('/update-product/:type', productController.update_product)
 

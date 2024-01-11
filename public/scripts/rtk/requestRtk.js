@@ -6,7 +6,8 @@ document.querySelector('#form-request').addEventListener('submit', () => {
     no_pekerja = document.querySelector('#no_pekerja').value
     nama_req = document.querySelector('#nama_req').value
     fungsi = document.querySelector('#fungsi').value
-    perusahaan = document.querySelector('#perusahaan').value
+    departemen = document.querySelector('#departemen').value
+    pekerjaan = document.querySelector('#pekerjaan').value
     no_kontak = document.querySelector('#no_kontak').value
     email = document.querySelector('#email').value
     desc_req = document.querySelector('#desc_req').value
@@ -41,7 +42,8 @@ document.querySelector('#form-request').addEventListener('submit', () => {
                 'no_pekerja': no_pekerja,
                 'nama_req': nama_req,
                 'fungsi': fungsi,
-                'perusahaan': perusahaan,
+                'departemen': departemen,
+                'pekerjaan': pekerjaan,
                 'no_kontak': no_kontak,
                 'email': email,
                 'status': 'Waiting Approval',

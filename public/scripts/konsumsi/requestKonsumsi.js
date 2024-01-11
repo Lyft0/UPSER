@@ -4,10 +4,12 @@ document.getElementById('form-request').addEventListener('submit', (event) => {
         jenis_konsum = document.getElementById(`jenis_konsum_${i}`).value
         paket_konsum = document.getElementById(`paket_konsum_${i}`).value
         jumlah = document.getElementById(`jumlah_${i}`).value
+        harga = "Rp. " + document.getElementById(`harga_${i}`).textContent
         itemList.push({
             'jenis_konsumsi':jenis_konsum,
             'paket_konsumsi':paket_konsum,
-            'jumlah':jumlah
+            'jumlah':jumlah,
+            'harga': harga
         })
     }
     console.log(itemList)
@@ -17,7 +19,8 @@ document.getElementById('form-request').addEventListener('submit', (event) => {
     no_pekerja = document.querySelector('#no_pekerja').value
     nama_req = document.querySelector('#nama_req').value
     fungsi = document.querySelector('#fungsi').value
-    perusahaan = document.querySelector('#perusahaan').value
+    departemen = document.querySelector('#departemen').value
+    pekerjaan = document.querySelector('#pekerjaan').value
     no_kontak = document.querySelector('#no_kontak').value
     email = document.querySelector('#email').value
     desc_req = document.querySelector('#desc_req').value
@@ -58,7 +61,8 @@ document.getElementById('form-request').addEventListener('submit', (event) => {
                 'no_pekerja': no_pekerja,
                 'nama_req': nama_req,
                 'fungsi': fungsi,
-                'perusahaan': perusahaan,
+                'departemen': departemen,
+                'pekerjaan': pekerjaan,
                 'no_kontak': no_kontak,
                 'email': email,
                 'status': 'Waiting Approval',

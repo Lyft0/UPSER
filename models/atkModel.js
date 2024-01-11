@@ -5,7 +5,7 @@ const Schema = mongoose.Schema // Schema object
 const atkSchema = new Schema({ // instance dari Schema
     nama_produk: {type: String, required: true},
     jenis_produk: {type: String, required: true},
-    jumlah: {type: Number, required: true}
+    harga: {type: Number, required: true},
 }) // constructor untuk generate timestamp update
 
 // model atk untuk digunakan save, get, delete data

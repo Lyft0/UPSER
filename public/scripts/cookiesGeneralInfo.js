@@ -5,12 +5,15 @@ document.querySelector('#req_by').value = cookies.nama
 document.querySelector('#no_pekerja').value = cookies.no_pekerja
 document.querySelector('#nama_req').value = cookies.nama
 document.querySelector('#fungsi').value = cookies.fungsi
-document.querySelector('#perusahaan').value = cookies.perusahaan
+document.querySelector('#departemen').value = cookies.departemen
+document.querySelector('#pekerjaan').value = cookies.pekerjaan
 document.querySelector('#no_kontak').value = cookies.no_kontak
 document.querySelector('#email').value = cookies.email
 
+let fungsi = cookies.fungsi
+
 document.querySelector('#req_for').addEventListener('click', () => {
-    fetch('/get-requester', {
+    fetch(`/get-requester/${fungsi}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
