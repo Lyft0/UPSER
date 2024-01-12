@@ -45,7 +45,7 @@ app.use(
     helmet.contentSecurityPolicy({
       directives: {
         scriptSrc: ["'self'", "'unsafe-inline'"],
-        scriptSrcElem: ["'self'", "cdn.jsdelivr.net", "unpkg.com", "cdnjs.cloudflare.com", "s3.amazonaws.com", "'unsafe-inline'"],
+        scriptSrcElem: ["'self'", "cdn.jsdelivr.net", "unpkg.com", "cdnjs.cloudflare.com", "s3.amazonaws.com", "'unsafe-inline'", "cdn.sheetjs.com"],
         scriptSrcAttr: ["'self'", "'unsafe-inline'"]
       },
     })
@@ -134,6 +134,7 @@ app.get('/logout', userController.logout)
 app.get('/home-admin', (req, res) => {
   res.render('home_admin')
 })
+app.get('/logout-admin', userController.logout_admin)
 // users admin
 app.get('/users-admin', userController.get_users)
 app.post('/add-user', userController.add_user)
@@ -144,8 +145,12 @@ app.get('/budgets-admin', anggaranController.get_anggaran)
 app.get('/budget-detail/:id', anggaranController.detail_anggaran)
 app.post('/add-budget', anggaranController.add_anggaran)
 app.post('/dec-budget', anggaranController.dec_anggaran)
+app.get('/get-riwayat/:id', anggaranController.get_riwayat)
 // product admin
 app.get('/products-admin', productController.page)
 app.get('/get-product/:type', productController.get_product)
 app.post('/update-product/:type', productController.update_product)
+
+
+
 

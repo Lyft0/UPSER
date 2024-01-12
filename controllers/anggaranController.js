@@ -15,8 +15,15 @@ const detail_anggaran = async (req, res) => {
 }
 
 const add_anggaran = async (req, res) => {
-    // BUAT ANGGAARN BERTAMBA DAN BERKURANG
     let prodi = await Anggaran.findOneAndUpdate({ _id: req.body.id_prodi }, { $push: { riwayat: req.body.riwayat } })
+
+    let harga = req.body.riwayat.total_biaya
+    harga = parseInt(harga.replace(/\D/g, ''), 10);
+    const result = await Anggaran.findOne({ _id: req.body.id_prodi }, { total_anggaran:1 })
+    let total_anggaran = result.total_anggaran
+
+    let update_anggaran = total_anggaran+harga
+    const update = await Anggaran.findOneAndUpdate({ _id: req.body.id_prodi }, { total_anggaran: update_anggaran })
 
     res.json({ redirect: `/budget-detail/${req.body.id_prodi}` })
 }
@@ -24,13 +31,29 @@ const add_anggaran = async (req, res) => {
 const dec_anggaran = async (req, res) => {
     let prodi = await Anggaran.findOneAndUpdate({ _id: req.body.id_prodi }, { $push: { riwayat: req.body.riwayat } })
 
+    let harga = req.body.riwayat.total_biaya
+    harga = parseInt(harga.replace(/\D/g, ''), 10);
+    const result = await Anggaran.findOne({ _id: req.body.id_prodi }, { total_anggaran:1 })
+    let total_anggaran = result.total_anggaran
+
+    let update_anggaran = total_anggaran-harga
+    const update = await Anggaran.findOneAndUpdate({ _id: req.body.id_prodi }, { total_anggaran: update_anggaran })
+
     res.json({ redirect: `/budget-detail/${req.body.id_prodi}` })
 }
+
+const get_riwayat = async (req, res) => {
+    const result = await Anggaran.findOne({ _id: req.params.id }, { riwayat:1 })
+    
+    res.json({ riwayat: result.riwayat })
+}
+
 
 module.exports = {
     get_anggaran,
     detail_anggaran,
     add_anggaran,
     dec_anggaran,
+    get_riwayat,
 }   
 

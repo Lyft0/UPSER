@@ -1,5 +1,8 @@
 document.getElementById('form-request').addEventListener('submit', (event) => {
     event.preventDefault();
+    document.querySelector('#submit').disabled = true
+    document.querySelector('#submit').style.cursor = 'not-allowed'
+
     for(i=0; i<hari; i++){
         jenis_konsum = document.getElementById(`jenis_konsum_${i}`).value
         paket_konsum = document.getElementById(`paket_konsum_${i}`).value
@@ -12,7 +15,6 @@ document.getElementById('form-request').addEventListener('submit', (event) => {
             'harga': harga
         })
     }
-    console.log(itemList)
 
     req_by = document.querySelector('#req_by').value
     req_for = document.querySelector('#req_for').value
@@ -85,7 +87,8 @@ document.getElementById('form-request').addEventListener('submit', (event) => {
                 'lokasi_kegiatan': lokasi_kegiatan,   
                 'jumlah_hari': jumlah_hari,
                 'sla': 2,
-                'item_konsumsi': itemList
+                'item_konsumsi': itemList,
+                'total_biaya': totalHarga,
             }
             
         })

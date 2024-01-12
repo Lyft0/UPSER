@@ -1,5 +1,7 @@
 document.querySelector('#form-request').addEventListener('submit', () => {
     event.preventDefault();
+    document.querySelector('#submit').disabled = true
+    document.querySelector('#submit').style.cursor = 'not-allowed'
     
     req_by = document.querySelector('#req_by').value
     req_for = document.querySelector('#req_for').value
@@ -42,7 +44,7 @@ document.querySelector('#form-request').addEventListener('submit', () => {
         },
         body: JSON.stringify({
             'ticket':{
-                'jenis_ticket': 'Peminjaman Ruangan/Tempat',
+                'jenis_ticket': 'Peminjaman Ruangan & Tempat',
                 'req_by': req_by,
                 'req_for': req_for,
                 'no_pekerja': no_pekerja,

@@ -2,9 +2,7 @@
 const Ticket = require('../models/ticketModel')
 const atkTicketModel = require('../models/atkTicketModel')
 const consumTicketModel = require('../models/consumTicketModel')
-// const eventSuppTicketModel = require('../models/eventSuppTicketModel')
 const expecourmailTicketModel = require('../models/expecourmailTicketModel')
-// const kartunamaTicketModel = require('../models/kartunamaTicketModel')
 const konsumsiTicketModel = require('../models/konsumsiTicketModel')
 const rtkTicketModel = require('../models/rtkTicketModel')
 const workfurnTicketModel = require('../models/workfurnTicketModel')
@@ -14,12 +12,13 @@ const User = require('../models/userModel')
 
 const { atkPrint } = require('../public/scripts/template_pdf/atkPrint')
 const { consumPrint } = require('../public/scripts/template_pdf/consumPrint')
-// const { eventsuppPrint } = require('../public/scripts/template_pdf/eventsuppPrint')
 const { expecourmailPrint } = require('../public/scripts/template_pdf/expecourmailPrint')
-// const { kartunamaPrint } = require('../public/scripts/template_pdf/kartunamaPrint')
 const { konsumsiPrint } = require('../public/scripts/template_pdf/konsumsiPrint')
 const { rtkPrint } = require('../public/scripts/template_pdf/rtkPrint')
 const { workfurnPrint } = require('../public/scripts/template_pdf/workfurnPrint')
+const { peminjamanPrint } = require('../public/scripts/template_pdf/peminjamanPrint')
+const { pengajuanbeliPrint } = require('../public/scripts/template_pdf/pengajuanbeliPrint')
+
 
 const delete_ticket = async (req, res) => {
     const id_user = req.params.user
@@ -96,9 +95,13 @@ const print_ticket = async (req, res) => {
             ticket_detail = await expecourmailTicketModel.findById(ticket.id_ticket_detail)
             doc = expecourmailPrint(ticket, ticket_detail)
             break;
-        case "Kartu Nama":
-            ticket_detail = await kartunamaTicketModel.findById(ticket.id_ticket_detail)
-            doc = kartunamaPrint(ticket, ticket_detail)
+        case "Peminjaman Ruangan & Tempat":
+            ticket_detail = await peminjamanTicketModel.findById(ticket.id_ticket_detail)
+            doc = peminjamanPrint(ticket, ticket_detail)
+            break;
+        case "Pengajuan Pembelian":
+            ticket_detail = await pengajuanbeliTicketModel.findById(ticket.id_ticket_detail)
+            doc = pengajuanbeliPrint(ticket, ticket_detail)
             break;
         case "Konsumsi":
             ticket_detail = await konsumsiTicketModel.findById(ticket.id_ticket_detail)
@@ -297,7 +300,6 @@ const get_data = async (req, res) => {
         await Ticket.find({priority: "Critical", status: "Pending"}).count(),
     ]
     const status_data = [low_data, medium_data, high_data, critical_data]
-    console.log(status_data)
 
     const date_data = await Ticket.aggregate([
         {

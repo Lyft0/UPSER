@@ -9,15 +9,13 @@
     <title>OFSER | Users</title>
 </head>
 <body>
-    <!-- <%- include('./partials/navbar_requester.ejs') %>  -->
-
     <div class="content-admin">
         <div class="sidebar-admin">
-            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">OFSER</p>
+            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">UPSER</p>
             
             <div class="info-admin">
                 <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
-                <p style="font-weight: bold;">Admin Lyft</p>
+                <p id="user-name" style="font-weight: bold;"></p>
             </div>
 
             <div class="fitur-admin">
@@ -38,7 +36,7 @@
                     Products
                 </a>
 
-                <a id="logout-admin" href="#">
+                <a id="logout-admin">
                     <img src="/images/icon/logout.png" alt="log" width="17px" style="filter: invert(1);">
                     Log Out
                 </a>
@@ -61,7 +59,7 @@
                     <tbody id="tbody">      
                         <% let i=1 %> 
                         <% user.forEach(u => { %>
-                            <tr id="row-<%= i %>">
+                            <tr id="row-<%= i %>" style="background-color: white;">
                                 <td style="vertical-align: middle;"><%= u.nama %></td>
                                 <td style="text-align: center; vertical-align: middle;"><%= u.no_pekerja %></td>
                                 <td style="text-align: center; vertical-align: middle; text-transform: capitalize;"><%= u.role %></td>
@@ -164,16 +162,40 @@
 
     <%- include('./partials/footer.ejs') %> 
 
+    <script src="/scripts/home/getCookies.js"></script>
+
+    <script>
+        document.querySelectorAll('#tbody > tr').forEach(e => {
+            if(e.childNodes[1].textContent == cookies.nama){
+                e.childNodes[13].childNodes[2].disabled = true
+                e.childNodes[13].childNodes[2].style.backgroundColor = 'pink'
+                e.childNodes[13].childNodes[2].style.cursor = 'not-allowed'
+            }
+        })
+    </script>
+
     <script>
         let myTable = new JSTable("#table-user");
     </script>
 
-    <script src="/scripts/home/getCookies.js"></script>
     <script src="/scripts/home/adminModal.js"></script>
     
     <script>
         document.querySelector('#profile').href = `/profile/${id_user}`
         document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+    </script>
+
+    <script>
+        document.querySelector('#logout-admin').addEventListener('click', () => {
+            fetch('/logout-admin', {
+                method: 'GET'
+            })
+            .then((response) => response.json())
+                .then((data) => window.location.href = data.redirect)
+                .catch((err) => {
+                    console.log(err)
+                })
+        })
     </script>
 </body>
 </html>

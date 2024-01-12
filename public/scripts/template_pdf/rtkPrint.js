@@ -16,7 +16,7 @@ const rtkPrint = (ticket, ticket_detail) => {
     doc.text(`${ticket.nama_req} / ${ticket.no_pekerja}`, 22, 59)
     doc.text(`${ticket.fungsi}`, 22, 65)
     doc.text(`${ticket.no_kontak} / ${ticket.email}`, 22, 71)
-    doc.text(`${ticket.perusahaan} / ${ticket.gedung}`, 22, 77)
+    doc.text(`${ticket.pekerjaan} / ${ticket.departemen}`, 22, 77)
     doc.text("Deskripsi Singkat", 20, 90)
     doc.text(`: ${ticket.desc_req}`, 80, 90)
     doc.text("Tanggal Penerimaan", 20, 96)
@@ -31,18 +31,34 @@ const rtkPrint = (ticket, ticket_detail) => {
 
     // Define the table data (including the header)
     var tableData = [
-        ['No', 'Nama Produk', 'Jumlah', 'Deskripsi'],
+        ['No', 'Nama Produk', 'Jumlah', 'Deskripsi', 'Harga'],
     ];
     
     let i = 1
     ticket_detail.item_rtk.forEach(item => {
-        let row = [i, item.jenis_produk, item.jumlah, item.deskripsi_produk]
+        let row = [i, item.nama_produk, item.jumlah, item.deskripsi_produk, item.harga]
         tableData.push(row)
         i += 1
     });
 
+    let totalBiaya = Intl.NumberFormat().format(ticket_detail.total_biaya)
+    let total = [{
+        content: 'Total Biaya : ',
+        colSpan: 4,
+        styles: {
+            halign: 'right'
+        }
+    },
+    {
+        content: `Rp. ${totalBiaya}`,
+        styles: {
+            halign: 'left'
+        }
+    }]
+    tableData.push(total)
+
     // Define table column widths (optional)
-    var columnWidths = [10, 50, 30, 50]; // Adjust as needed
+    var columnWidths = [10, 50, 20, 50, 30]; // Adjust as needed
 
     // Add a table with a header to the PDF using autoTable
     doc.autoTable({
@@ -54,6 +70,7 @@ const rtkPrint = (ticket, ticket_detail) => {
             1: { cellWidth: columnWidths[1] },
             2: { cellWidth: columnWidths[2] },
             3: { cellWidth: columnWidths[3] },
+            4: { cellWidth: columnWidths[4] },
         },
         margin: {left: 20, right: 50}
     })

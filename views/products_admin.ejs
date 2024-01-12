@@ -7,15 +7,14 @@
     <title>OFSER | Products</title>
 </head>
 <body>
-    <!-- <%- include('./partials/navbar_requester.ejs') %>  -->
 
     <div class="content-admin">
         <div class="sidebar-admin">
-            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">OFSER</p>
+            <p style="font-family: 'League Spartan', sans-serif; font-size: 1.3em; padding: 20px 0px 0px 20px;">UPSER</p>
             
             <div class="info-admin">
                 <img id="profile_img" src="/images/profile/admin.jpg" alt="profile" width="90px" style="border-radius: 50px; border: 1px solid black;">
-                <p style="font-weight: bold;">Admin Lyft</p>
+                <p id="user-name" style="font-weight: bold;"></p>
             </div>
 
             <div class="fitur-admin">
@@ -36,7 +35,7 @@
                     Products
                 </a>
 
-                <a id="logout-admin" href="#">
+                <a id="logout-admin">
                     <img src="/images/icon/logout.png" alt="log" width="17px" style="filter: invert(1);">
                     Log Out
                 </a>
@@ -87,9 +86,18 @@
 
     <script src="/scripts/home/getCookies.js"></script>
 
-    
+
     <script>
-        document.querySelector('#profile_img').src = '/images/profile/'+cookies.image
+        document.querySelector('#logout-admin').addEventListener('click', () => {
+            fetch('/logout-admin', {
+                method: 'GET'
+            })
+            .then((response) => response.json())
+                .then((data) => window.location.href = data.redirect)
+                .catch((err) => {
+                    console.log(err)
+                })
+        })
     </script>
 </body>
 </html>

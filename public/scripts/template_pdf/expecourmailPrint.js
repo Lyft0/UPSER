@@ -16,7 +16,7 @@ const expecourmailPrint = (ticket, ticket_detail) => {
     doc.text(`${ticket.nama_req} / ${ticket.no_pekerja}`, 22, 59)
     doc.text(`${ticket.fungsi}`, 22, 65)
     doc.text(`${ticket.no_kontak} / ${ticket.email}`, 22, 71)
-    doc.text(`${ticket.perusahaan} / ${ticket.gedung}`, 22, 77)
+    doc.text(`${ticket.pekerjaan} / ${ticket.departemen}`, 22, 77)
     doc.text("Deskripsi Singkat", 20, 90)
     doc.text(`: ${ticket.desc_req}`, 80, 90)
     doc.text("Jenis Pengiriman", 20, 96)

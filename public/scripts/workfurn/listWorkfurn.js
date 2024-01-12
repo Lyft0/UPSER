@@ -30,7 +30,6 @@ jenisWorkfurn.addEventListener('change', () => {
                     const option = document.createElement('option')
                     option.value = produk.nama_produk
                     option.textContent = produk.nama_produk
-                    option.dataset.jumlah = produk.jumlah
                     option.dataset.harga = produk.harga
                     listWorkfurn.appendChild(option)
                 });
@@ -42,6 +41,5 @@ jenisWorkfurn.addEventListener('change', () => {
 });
 
 listWorkfurn.addEventListener('change', () => {
-    document.querySelector('#jumlah').max = listWorkfurn.options[listWorkfurn.selectedIndex].dataset.jumlah
     document.querySelector('#harga').textContent = Intl.NumberFormat().format(listWorkfurn.options[listWorkfurn.selectedIndex].dataset.harga)
 })

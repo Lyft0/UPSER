@@ -59,6 +59,10 @@
                     </tr>
                     <tbody id="item-list">
                     </tbody>
+                    <tr style="font-size:0.8em">
+                        <td colspan="4" style="text-align: end;">Total Biaya:</td>
+                        <td>Rp. <span id="total_harga">0</span></td> 
+                     </tr>
                 </table>
                 <button type="submit" id="submit" class="btn btn-success">Submit Request</button>
             </div>
@@ -67,11 +71,26 @@
     <script>
     let hari = 0
     let itemList = []
+    var totalHarga = 0
+
+    const hitungTotal = () => {
+        totalHarga = 0
+        hari = document.getElementById('jumlah_hari').value
+        for(let i=0; i<hari; i++){
+            temp = document.getElementById(`harga_${i}`).textContent
+            harga = parseInt(temp.replace(/\D/g, ''), 10);
+            totalHarga += harga
+        }
+        console.log(totalHarga)
+        document.querySelector('#total_harga').textContent = Intl.NumberFormat().format(totalHarga)
+    }
+
     document.getElementById('jumlah_hari').addEventListener('change',(event) => {
         var table = document.getElementById("item-list")
         table.innerHTML = ''
         itemList = []
         hari = event.target.value
+        
         for(let i=0; i<event.target.value; i++){
             var row = table.insertRow(-1)
             row.style.fontSize = "0.8em"
@@ -100,7 +119,8 @@
             const listPaket = document.getElementById(`paket_konsum_${i}`);
             
             jenisKonsum.addEventListener('change', () => {
-                const selectedJenis = jenisKonsum.value;        
+                const selectedJenis = jenisKonsum.value;  
+                    
                 fetch('/konsumsi-paket', {
                     method: 'POST',
                     headers: {
@@ -123,6 +143,8 @@
                         option.dataset.harga = paket.harga
                         listPaket.appendChild(option)
                     });
+
+                    hitungTotal()
                 })
                 .catch((err) => {
                     console.log(err)
@@ -135,6 +157,8 @@
                 temp_paket = document.querySelector(`#paket_konsum_${i}`).childNodes
                 index = document.querySelector(`#paket_konsum_${i}`).selectedIndex
                 document.querySelector(`#harga_${i}`).textContent = Intl.NumberFormat().format(temp_paket[index].dataset.harga)
+
+                hitungTotal()
             })
 
             document.querySelector(`#jumlah_${i}`).addEventListener('change', () => {
@@ -142,8 +166,12 @@
                 index = document.querySelector(`#jumlah_${i}`).parentNode.parentNode.childNodes[2].childNodes[0].selectedIndex
                 harga = document.querySelector(`#jumlah_${i}`).parentNode.parentNode.childNodes[2].childNodes[0].childNodes[index].dataset.harga
                 document.querySelector(`#harga_${i}`).textContent = Intl.NumberFormat().format(harga*jmlh)
+
+                hitungTotal()
             })
         }
+
+        hitungTotal()
     })
 
 

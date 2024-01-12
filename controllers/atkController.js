@@ -2,6 +2,7 @@ const _ = require('underscore');
 const Atk = require('../models/atkModel')
 const Ticket = require('../models/ticketModel');
 const AtkTicket = require('../models/atkTicketModel');
+const Anggaran = require('../models/anggaranModel')
 
 // menampilkan jenis atk
 const atk_jenis = (req, res) => {
@@ -27,11 +28,24 @@ const atk_produk = (req, res) => {
         })
 }
 
-const atk_request = (req, res) => {
+const atk_request = async (req, res) => {
     const atk_ticket = new AtkTicket(req.body.atk_ticket)
     const ticket = new Ticket(req.body.ticket)
     ticket.id_ticket_detail = atk_ticket._id
-    
+
+    riwayat = {
+        'nama': ticket.nama_req,
+        'layanan': ticket.jenis_ticket,
+        'tanggal': ticket.activity[0].tgl,
+        'deskripsi': ticket.desc_req,
+        'total_biaya': "Rp. " + Intl.NumberFormat().format(atk_ticket.total_biaya), 
+    }
+    let prodi = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { $push: { riwayat: riwayat } })
+    const result = await Anggaran.findOne({ nama_prodi: ticket.fungsi }, { total_anggaran:1 })
+    let total_anggaran = result.total_anggaran
+    let update_anggaran = total_anggaran-atk_ticket.total_biaya
+    const update = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { total_anggaran: update_anggaran })
+
     // method untuk menyimpan ke database model.save()
     ticket.save()
         .then((result) => {        
@@ -44,6 +58,7 @@ const atk_request = (req, res) => {
                 })
         })
         .catch((err) => {
+            res.json({ error: 'error'}) // --->
             console.log(err)
         })
 }

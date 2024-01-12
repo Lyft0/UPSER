@@ -2,6 +2,7 @@ const _ = require('underscore');
 const Consum = require('../models/consumModel')
 const Ticket = require('../models/ticketModel');
 const ConsumTicket = require('../models/consumTicketModel');
+const Anggaran = require('../models/anggaranModel')
 
 // menampilkan jenis consum
 const consum_jenis = (req, res) => {
@@ -14,10 +15,24 @@ const consum_jenis = (req, res) => {
         })
 }
 
-const consum_request = (req, res) => {
+const consum_request = async (req, res) => {
     const consum_ticket = new ConsumTicket(req.body.consum_ticket)
     const ticket = new Ticket(req.body.ticket)
     ticket.id_ticket_detail = consum_ticket._id
+
+    riwayat = {
+        'nama': ticket.nama_req,
+        'layanan': ticket.jenis_ticket,
+        'tanggal': ticket.activity[0].tgl,
+        'deskripsi': ticket.desc_req,
+        'total_biaya': "Rp. " + Intl.NumberFormat().format(consum_ticket.total_biaya), 
+    }
+    let prodi = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { $push: { riwayat: riwayat } })
+    const result = await Anggaran.findOne({ nama_prodi: ticket.fungsi }, { total_anggaran:1 })
+    let total_anggaran = result.total_anggaran
+    let update_anggaran = total_anggaran-consum_ticket.total_biaya
+    const update = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { total_anggaran: update_anggaran })
+
     // method untuk menyimpan ke database model.save()
     ticket.save()
         .then((result) => {        

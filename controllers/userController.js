@@ -112,6 +112,13 @@ const delete_user = async (req, res) => {
         })
 }
 
+
+const logout_admin = (req, res) => {
+    res.clearCookie('user');
+    res.json({ redirect: '/login' })
+}
+
+
 module.exports = {
     user_login,
     my_request,
@@ -124,4 +131,5 @@ module.exports = {
     add_user,
     update_user,
     delete_user,
+    logout_admin
 }

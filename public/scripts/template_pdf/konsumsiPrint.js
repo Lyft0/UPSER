@@ -16,7 +16,7 @@ const konsumsiPrint = (ticket, ticket_detail) => {
     doc.text(`${ticket.nama_req} / ${ticket.no_pekerja}`, 22, 59)
     doc.text(`${ticket.fungsi}`, 22, 65)
     doc.text(`${ticket.no_kontak} / ${ticket.email}`, 22, 71)
-    doc.text(`${ticket.perusahaan} / ${ticket.gedung}`, 22, 77)
+    doc.text(`${ticket.pekerjaan} / ${ticket.departemen}`, 22, 77)
     doc.text("Deskripsi Kegiatan", 20, 90)
     doc.text(`: ${ticket_detail.desc_kegiatan}`, 80, 90)
     doc.text("Jenis Kegiatan", 20, 96)
@@ -33,18 +33,34 @@ const konsumsiPrint = (ticket, ticket_detail) => {
 
     // Define the table data (including the header)
     var tableData = [
-        ['Hari', 'Jenis Konsumsi', 'Paket Konsumsi', 'Jumlah'],
+        ['Hari', 'Jenis Konsumsi', 'Paket Konsumsi', 'Jumlah', 'Harga'],
     ];
     
     let i = 1
     ticket_detail.item_konsumsi.forEach(item => {
-        let row = [i, item.jenis_konsumsi, item.paket_konsumsi, item.jumlah]
+        let row = [i, item.jenis_konsumsi, item.paket_konsumsi, item.jumlah, item.harga]
         tableData.push(row)
         i += 1
     });
 
+    let totalBiaya = Intl.NumberFormat().format(ticket_detail.total_biaya)
+    let total = [{
+        content: 'Total Biaya : ',
+        colSpan: 4,
+        styles: {
+            halign: 'right'
+        }
+    },
+    {
+        content: `Rp. ${totalBiaya}`,
+        styles: {
+            halign: 'left'
+        }
+    }]
+    tableData.push(total)
+
     // Define table column widths (optional)
-    var columnWidths = [13, 50, 50, 20]; // Adjust as needed
+    var columnWidths = [13, 40, 40, 20, 30]; // Adjust as needed
 
     // Add a table with a header to the PDF using autoTable
     doc.autoTable({

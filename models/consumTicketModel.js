@@ -7,6 +7,7 @@ const consumTicketSchema = new Schema({ // instance dari Schema
     lokasi_terima: {type: String, required: true},
     sla: {type: Number, required: true},
     item_consum: {type: Object, required: true},
+    total_biaya: {type: Number, required: true},
 }) // constructor untuk generate timestamp update
 
 // model consum untuk digunakan save, get, delete data

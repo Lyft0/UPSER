@@ -1,4 +1,5 @@
 let itemList = []
+let totalHarga = 0
 
 document.querySelector('#add-item').addEventListener('click', () => {
     const jenis = document.querySelector('#jenis_atk').value
@@ -19,6 +20,9 @@ document.querySelector('#add-item').addEventListener('click', () => {
             'deskripsi_produk':`${deskripsi}`,
             'harga':`${harga}`
         })
+
+        totalHarga += parseInt(temp_harga, 10)*jumlah
+        document.querySelector('#total_harga').textContent = Intl.NumberFormat().format(totalHarga)
 
         var table = document.getElementById("item-list")
         var row = table.insertRow(-1)
@@ -60,6 +64,13 @@ document.querySelector('#item').addEventListener("click", function(event) {
         const index = event.target.parentNode.parentNode.rowIndex;
         document.querySelector('#item').deleteRow(index)
         remove = itemList.splice(index-1, 1)
+
+        totalHarga = 0
+        itemList.forEach(e => {
+            temp = e.harga
+            totalHarga += parseInt(temp.replace(/\D/g, ''), 10);
+        })
+        document.querySelector('#total_harga').textContent = Intl.NumberFormat().format(totalHarga)
     }
 })
 

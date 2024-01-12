@@ -1,6 +1,8 @@
 document.querySelector('#form-request').addEventListener('submit', () => {
     event.preventDefault();
-
+    document.querySelector('#submit').disabled = true
+    document.querySelector('#submit').style.cursor = 'not-allowed'
+    
     req_by = document.querySelector('#req_by').value
     req_for = document.querySelector('#req_for').value
     no_pekerja = document.querySelector('#no_pekerja').value

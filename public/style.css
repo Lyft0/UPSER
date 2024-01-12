@@ -885,6 +885,7 @@ input[type="range"]::-webkit-slider-thumb {
     color: white;
     background-color: rgb(255, 83, 83);
     border-radius: 0 15px 15px 0;
+    cursor: pointer;
 }
 #logout-admin:hover {
     background-color: rgb(251, 48, 48);
@@ -1132,4 +1133,16 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translateY(-1px);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
+
+#excel-report {
+    font-weight: bold;
+    padding: 15px;
+    font-size: 0.9em;
+    color: white;
+    background-color: #059636;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
 
