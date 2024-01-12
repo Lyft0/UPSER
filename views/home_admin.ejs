@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>OFSER | Home Admin</title>
+    <title>UPSER | Home Admin</title>
 </head>
 <body>
     <div class="content-admin">
@@ -47,7 +47,7 @@
 
         <div class="main-admin">
             <p id="content-title">Dashboard</p>
-            <p style="font-size: 1.2em;">Welcome, <span id="user-name" style="font-weight: 400;"></span></p>
+            <p style="font-size: 1.2em;">Welcome, <span id="user-name-span" style="font-weight: 400;"></span></p>
             <div class="vis-admin">
                 <div class="vis1" style="background-color:white; height: 100%; width: 55%; padding: 20px; border-radius: 10px;">
                     <p style="margin-bottom: 30px;">Tickets Backlog</p>
@@ -95,6 +95,9 @@
                     console.log(err)
                 })
         })
+    </script>
+    <script>
+        document.querySelector('#user-name-span').textContent = cookies.nama
     </script>
 </body>
 </html>

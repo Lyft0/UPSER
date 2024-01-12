@@ -1,7 +1,6 @@
 document.getElementById('form-request').addEventListener('submit', (event) => {
     event.preventDefault();
     document.querySelector('#submit').disabled = true
-    document.querySelector('#submit').style.cursor = 'not-allowed'
 
     for(i=0; i<hari; i++){
         jenis_konsum = document.getElementById(`jenis_konsum_${i}`).value
@@ -94,7 +93,18 @@ document.getElementById('form-request').addEventListener('submit', (event) => {
         })
     })
         .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
+        .then((data) => {  // --->
+            if(data.error == "error"){
+                document.querySelector('#error-input').style.display = 'inline'
+                setTimeout(() => {document.querySelector('#error-input').style.display = 'none'}, 4000)
+                document.querySelector('#submit').disabled = false
+            }else{
+                swal("Success!", "Request Submitted Succesfully", "success")
+                .then(() => {
+                    window.location.href = data.redirect
+                })
+            }
+        })
         .catch((err) => {
             console.log(err)
         })

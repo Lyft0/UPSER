@@ -19,10 +19,12 @@ const expecourmail_request = (req, res) => {
                     res.json({ redirect: '/request/expecourmail' })
                 })
                 .catch((err) => {
+                    res.json({ error: 'error'}) // --->
                     console.log(err)
                 })
         })
         .catch((err) => {
+            res.json({ error: 'error'}) // --->
             console.log(err)
         })
 }

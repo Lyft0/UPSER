@@ -31,6 +31,7 @@ const pengajuanbeli_request = (req, res) => {
                 })
         })
         .catch((err) => {
+            res.json({ error: 'error'}) // --->
             console.log(err)
         })
 }

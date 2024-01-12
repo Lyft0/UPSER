@@ -124,11 +124,30 @@ document.querySelectorAll('.del-user').forEach(element => {
     element.addEventListener('click', (event) => {
         const id_user = event.currentTarget.dataset.user
         const endpoint = `/delete-user/${id_user}`
-        fetch(endpoint, {
-            method: 'DELETE'
-        })
-        .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
-        .catch((err) => console.log(err))
+
+        swal({
+            title: "Delete User?",
+            text: "Once deleted, you will not be able to recover this!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              fetch(endpoint, {
+                method: 'DELETE'
+              })
+              .then((response) => response.json())
+              .then((data) => {
+                swal("User has been deleted!", {
+                  icon: "success",
+                })
+                .then(() => {
+                  window.location.href = data.redirect
+                })
+              })
+              .catch((err) => console.log(err))
+            }
+          });
     })
 })

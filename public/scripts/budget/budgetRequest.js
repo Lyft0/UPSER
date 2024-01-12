@@ -13,21 +13,39 @@ document.querySelector('.req-add-ang').addEventListener('click', () => {
         'total_biaya': jumlah_tambah, 
     }
 
-    fetch('/add-budget', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            'id_prodi': id, 
-            'riwayat': riwayat,
-        })
-    })
-    .then((response) => response.json())
-    .then((data) => window.location.href = data.redirect)
-    .catch((err) => {
-        console.log(err)
-    })
+    swal({
+        title: "Setor Anggaran?",
+        text: "Anggaran akan ditambah sesuai jumlah yang dimasukkan!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            fetch('/add-budget', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'id_prodi': id, 
+                    'riwayat': riwayat,
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                swal("Penyetoran Berhasil!", {
+                    icon: "success",
+                })
+                .then(() => {
+                    window.location.href = data.redirect
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+      });
 })
 
 document.querySelector('.req-dec-ang').addEventListener('click', () => {
@@ -45,19 +63,39 @@ document.querySelector('.req-dec-ang').addEventListener('click', () => {
         'total_biaya': jumlah_kurang, 
     }
 
-    fetch('/dec-budget', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            'id_prodi': id, 
-            'riwayat': riwayat,
-        })
-    })
-    .then((response) => response.json())
-    .then((data) => window.location.href = data.redirect)
-    .catch((err) => {
-        console.log(err)
-    })
+    swal({
+        title: "Pengeluaran Anggaran?",
+        text: "Anggaran akan dikurangi sesuai jumlah yang dimasukkan!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            fetch('/dec-budget', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'id_prodi': id, 
+                    'riwayat': riwayat,
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                swal("Pengeluaran Berhasil!", {
+                    icon: "success",
+                })
+                .then(() => {
+                    window.location.href = data.redirect
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+      });
+
+
 })

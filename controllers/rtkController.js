@@ -20,24 +20,23 @@ const rtk_request = async (req, res) => {
     const ticket = new Ticket(req.body.ticket)
     ticket.id_ticket_detail = rtk_ticket._id
 
-    riwayat = {
-        'nama': ticket.nama_req,
-        'layanan': ticket.jenis_ticket,
-        'tanggal': ticket.activity[0].tgl,
-        'deskripsi': ticket.desc_req,
-        'total_biaya': "Rp. " + Intl.NumberFormat().format(rtk_ticket.total_biaya), 
-    }
-    let prodi = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { $push: { riwayat: riwayat } })
-    const result = await Anggaran.findOne({ nama_prodi: ticket.fungsi }, { total_anggaran:1 })
-    let total_anggaran = result.total_anggaran
-    let update_anggaran = total_anggaran-rtk_ticket.total_biaya
-    const update = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { total_anggaran: update_anggaran })
-
     // method untuk menyimpan ke database model.save()
     ticket.save()
         .then((result) => {        
             rtk_ticket.save()
-                .then((result) => {
+                .then(async (result) => {
+                    riwayat = {
+                        'nama': ticket.nama_req,
+                        'layanan': ticket.jenis_ticket,
+                        'tanggal': ticket.activity[0].tgl,
+                        'deskripsi': ticket.desc_req,
+                        'total_biaya': "Rp. " + Intl.NumberFormat().format(rtk_ticket.total_biaya), 
+                    }
+                    let prodi = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { $push: { riwayat: riwayat } })
+                    const hasil = await Anggaran.findOne({ nama_prodi: ticket.fungsi }, { total_anggaran:1 })
+                    let total_anggaran = hasil.total_anggaran
+                    let update_anggaran = total_anggaran-rtk_ticket.total_biaya
+                    const update = await Anggaran.findOneAndUpdate({ nama_prodi: ticket.fungsi }, { total_anggaran: update_anggaran })
                     res.json({ redirect: '/request/rtk' })
                 })
                 .catch((err) => {
@@ -45,6 +44,7 @@ const rtk_request = async (req, res) => {
                 })
         })
         .catch((err) => {
+            res.json({ error: 'error'}) // --->
             console.log(err)
         })
 }

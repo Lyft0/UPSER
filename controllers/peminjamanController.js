@@ -32,6 +32,7 @@ const peminjaman_request = (req, res) => {
                 })
         })
         .catch((err) => {
+            res.json({ error: 'error'}) // --->
             console.log(err)
         })
 }

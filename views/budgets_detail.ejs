@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" type="text/css" href="/jstable.css">
     <script type="text/javascript" src="/jstable.min.js"></script>
-    <title>OFSER | Budgets Detail</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>UPSER | Budgets Detail</title>
 </head>
 <body>
     <div class="content-admin">
@@ -110,8 +111,8 @@
                 <div class="table-user">
                     <table border="1" id="table-user" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead style="background-color: rgb(83, 83, 83); color: white; font-size: 0.9em;"><th>Nama</th><th>Layanan</th><th>Tanggal</th><th>Deskripsi</th><th>Total Biaya</th></thead>
-                        <tbody id="tbody">
-                            <% anggaran.riwayat.forEach(e => { %>
+                        <tbody id="tbody"> 
+                            <% anggaran.riwayat.reverse().forEach(e => { %>
                                     <tr style="font-size: 0.9em; background-color: white;">
                                         <td><%= e.nama %></td>
                                         <td style="text-align: center;"><%= e.layanan %></td>

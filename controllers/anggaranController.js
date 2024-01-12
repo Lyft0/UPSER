@@ -44,7 +44,7 @@ const dec_anggaran = async (req, res) => {
 
 const get_riwayat = async (req, res) => {
     const result = await Anggaran.findOne({ _id: req.params.id }, { riwayat:1 })
-    
+
     res.json({ riwayat: result.riwayat })
 }
 

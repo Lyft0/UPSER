@@ -20,12 +20,31 @@ document.querySelectorAll('.btn-cancel').forEach(element => {
   element.addEventListener('click', (event) => {
     const id_ticket = event.currentTarget.dataset.ticket
     const endpoint = `/delete-ticket/${id_user}/${id_ticket}`
-    fetch(endpoint, {
-      method: 'DELETE'
+    swal({
+      title: "Cancel Ticket?",
+      text: "Once deleted, you will not be able to recover this!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-    .then((response) => response.json())
-    .then((data) => window.location.href = data.redirect)
-    .catch((err) => console.log(err))
+    .then((willDelete) => {
+      if (willDelete) {
+        fetch(endpoint, {
+          method: 'DELETE'
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          swal("Your Ticket has been deleted!", {
+            icon: "success",
+          })
+          .then(() => {
+            window.location.href = data.redirect
+          })
+        })
+        .catch((err) => console.log(err))
+      }
+    });
+    
   })
 })
 

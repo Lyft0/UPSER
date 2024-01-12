@@ -1,8 +1,7 @@
 document.querySelector('#form-request').addEventListener('submit', () => {
     event.preventDefault();
     document.querySelector('#submit').disabled = true
-    document.querySelector('#submit').style.cursor = 'not-allowed'
-    
+
     req_by = document.querySelector('#req_by').value
     req_for = document.querySelector('#req_for').value
     no_pekerja = document.querySelector('#no_pekerja').value
@@ -79,7 +78,18 @@ document.querySelector('#form-request').addEventListener('submit', () => {
         })
     })
         .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
+        .then((data) => {  // --->
+            if(data.error == "error"){
+                document.querySelector('#error-input').style.display = 'inline'
+                setTimeout(() => {document.querySelector('#error-input').style.display = 'none'}, 4000)
+                document.querySelector('#submit').disabled = false
+            }else{
+                swal("Success!", "Request Submitted Succesfully", "success")
+                .then(() => {
+                    window.location.href = data.redirect
+                })
+            }
+        })
         .catch((err) => {
             console.log(err)
         })

@@ -166,20 +166,38 @@ document.querySelector('#update-prod').addEventListener('click', () => {
             break
     }
 
-    fetch(`/update-product/${product_type}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            'product': itemList
-        })
-    })
-    .then((response) => response.json())
-    .then((data) => window.location.href = data.redirect)
-    .catch((err) => {
-        console.log(err)
-    })
+    swal({
+        title: "Update Product?",
+        text: "Once updated, you will not be able to recover this!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            fetch(`/update-product/${product_type}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'product': itemList
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                swal("Your Products has been Updated!", {
+                    icon: "success",
+                  })
+                  .then(() => {
+                    window.location.href = data.redirect
+                  })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+      });
 })
 
 
